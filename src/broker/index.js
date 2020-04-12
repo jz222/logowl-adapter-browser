@@ -4,7 +4,7 @@ import config from '../config/index';
 import utils from '../utils/index';
 import logs from '../logs/index';
 
-const registerError = ({ message, file: path, line, stacktrace, constructor }) => {
+const registerError = ({ message, path = '', line = '', stack: stacktrace, constructor }) => {
     const userConfig = config.get();
     
     if (!message || !stacktrace || !userConfig.ticket) {

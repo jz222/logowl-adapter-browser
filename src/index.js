@@ -1,5 +1,6 @@
 import eventListener from './eventListener/index';
 import interceptors from './interceptors/index';
+import broker from './broker/index';
 import config from './config/index';
 
 const init = (userConfig) => {
@@ -9,4 +10,8 @@ const init = (userConfig) => {
     eventListener.enable();
 };
 
-export default { init };
+const emitError = (error) => {
+    broker.registerError(error);
+};
+
+export default { init, emitError };
