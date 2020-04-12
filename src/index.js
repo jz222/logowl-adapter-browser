@@ -7,7 +7,7 @@ const init = (userConfig) => {
     config.set(userConfig);
     
     interceptors.enableAll();
-    eventListener.enable();
+    eventListener.enableAll();
 };
 
 const emitError = (error) => {

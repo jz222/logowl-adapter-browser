@@ -1,6 +1,6 @@
 import broker from '../broker/index';
 
-const enable = () => {
+const enableErrorListener = () => {
     window.onerror = (message, file, line, column, error = {}) => {
         column = column || (window.event && window.event.errorCharacter);
         
@@ -19,4 +19,8 @@ const enable = () => {
     };
 };
 
-export default { enable };
+const enableAll = () => {
+    enableErrorListener();
+};
+
+export default { enableAll };
