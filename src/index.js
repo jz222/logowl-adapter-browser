@@ -11,6 +11,12 @@ const init = (userConfig) => {
 };
 
 const emitError = (error) => {
+    const lastStacktrace = error.stack.replace('at ', '').split('\n')[1] || '';
+    const splitStacktrace = lastStacktrace.split(':');
+    
+    error.line = splitStacktrace[splitStacktrace.length - 2];
+    error.path = splitStacktrace.slice(0, -2).join(':').trim();
+    
     broker.registerError(error);
 };
 
