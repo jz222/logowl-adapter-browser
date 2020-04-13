@@ -1,3 +1,4 @@
+import userInteraction from '../userInteractions/index';
 import constants from '../constants/index';
 import request from '../request/index';
 import config from '../config/index';
@@ -19,6 +20,7 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
         ...(userConfig.badges && { badges: userConfig.badges }),
         line: line.toString(),
         type: (constructor && constructor.name) || 'error',
+        userInteraction: userInteraction.get(),
         stacktrace,
         adapter: constants.adapter,
         timestamp: utils.generateUTCInSeconds()

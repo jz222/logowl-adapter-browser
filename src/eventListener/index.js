@@ -1,3 +1,4 @@
+import userInteractions from '../userInteractions/index';
 import broker from '../broker/index';
 
 const enableErrorListener = () => {
@@ -19,8 +20,13 @@ const enableErrorListener = () => {
     };
 };
 
+const enableUserInteractionsListener = () => {
+    document.addEventListener('focusin', userInteractions.add);
+};
+
 const enableAll = () => {
     enableErrorListener();
+    enableUserInteractionsListener();
 };
 
 export default { enableAll };
