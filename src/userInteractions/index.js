@@ -9,6 +9,7 @@ const userInteractions = () => {
             element: e.target.tagName.toLowerCase(),
             outerHtml: e.target.outerHTML.replace(/"/g, `'`),
             elementId: e.target.id,
+            location: window.location.pathname,
             path: e.path.map(node => {
                 if (node === window) {
                     return 'window';
@@ -24,7 +25,7 @@ const userInteractions = () => {
         
         userInteractions.push(userInteraction);
         
-        if (userInteractions.length > 20) {
+        if (userInteractions.length > 25) {
             userInteractions.shift();
         }
     };

@@ -10,7 +10,7 @@ const logs = () => {
         
         logs.push({ timestamp: utils.generateUTCInSeconds(), type: 'log', log });
         
-        if (logs.length > 10) {
+        if (logs.length > 15) {
             logs.shift();
         }
     };
