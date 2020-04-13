@@ -20,7 +20,7 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
         ...(userConfig.badges && { badges: userConfig.badges }),
         line: line.toString(),
         type: (constructor && constructor.name) || 'error',
-        userInteraction: userInteraction.get(),
+        userInteractions: userInteraction.get(),
         stacktrace,
         adapter: constants.adapter,
         timestamp: utils.generateUTCInSeconds()
