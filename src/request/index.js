@@ -5,7 +5,12 @@ const request = (event, eventType = 'error') => {
     const userConfig = config.get();
     const req = new XMLHttpRequest();
     
-    const host = constants.connectivity.service[userConfig.instance] || constants.connectivity.service.prod;
+    let host = constants.connectivity.service[userConfig.instance] || constants.connectivity.service.prod;
+    
+    if (userConfig.endpoint) {
+        host = userConfig.endpoint;
+    }
+    
     const slug = '/logging/' + eventType;
     
     req.open('POST', host + slug, true);
