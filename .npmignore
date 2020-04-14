@@ -4,4 +4,3 @@ dev
 src/*
 babel.config.js
 rollup.config.js
-README.md
