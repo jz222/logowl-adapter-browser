@@ -3,6 +3,10 @@ import interceptors from './interceptors/index';
 import broker from './broker/index';
 import config from './config/index';
 
+/**
+ * Initializes the adapter with the provided user config.
+ * @param userConfig {object} the config provided by the user
+ */
 const init = (userConfig) => {
     config.set(userConfig);
     
@@ -10,6 +14,10 @@ const init = (userConfig) => {
     eventListener.enableAll();
 };
 
+/**
+ * Emits an error.
+ * @param error {object} error object
+ */
 const emitError = (error) => {
     const lastStacktrace = error.stack.replace('at ', '').split('\n')[1] || '';
     const splitStacktrace = lastStacktrace.split(':');

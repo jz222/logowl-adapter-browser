@@ -1,8 +1,16 @@
+/**
+ * Validates and stores the user configuration.
+ * @returns {{set: set, get: (function(): {sendAnalytics: boolean})}}
+ */
 const config = () => {
     let _config = {
         sendAnalytics: false,
     };
     
+    /**
+     * Stores the provided user configuration.
+     * @param userConfig {object} the configuration provided by the user.
+     */
     const set = (userConfig = {}) => {
         if (typeof userConfig !== 'object' || userConfig.constructor !== Object) {
             throw new Error('the provided LOGGY config is not a valid object');
@@ -25,6 +33,10 @@ const config = () => {
         _config = { ..._config, ...userConfig };
     };
     
+    /**
+     * Returns the stored user configuration.
+     * @returns {{sendAnalytics: boolean}} the user configuration
+     */
     const get = () => _config;
     
     return { set, get };

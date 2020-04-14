@@ -1,5 +1,8 @@
 import logs from '../logs/index';
 
+/**
+ * Enables all interceptors.
+ */
 const enableAll = () => {
     const log = console.log.bind(console);
     
