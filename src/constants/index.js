@@ -1,4 +1,5 @@
 export default {
+    focusableElements: ['button', 'details', 'input', 'iframe', 'select', 'textarea'],
     connectivity: {
         service: {
             local: 'http://localhost:2800',

@@ -12,23 +12,18 @@ const userInteractions = () => {
      * @param e {object} the event object
      */
     const add = (e) => {
+        let outerHtml = e.target.outerHTML.replace(/"/g, `'`);
+        
+        if (e.target.tagName.toLowerCase() === 'html' || e.target.tagName.toLowerCase() === 'body') {
+            outerHtml = 'n/a';
+        }
+        
         const userInteraction = {
+            outerHtml,
             timestamp: utils.generateUTCInSeconds(),
             element: e.target.tagName.toLowerCase(),
-            outerHtml: e.target.outerHTML.replace(/"/g, `'`),
             elementId: e.target.id,
-            location: window.location.pathname,
-            path: e.path.map(node => {
-                if (node === window) {
-                    return 'window';
-                }
-                
-                if (node === document) {
-                    return 'document';
-                }
-                
-                return (node.tagName || '').toLowerCase();
-            })
+            location: window.location.pathname
         };
         
         userInteractions.push(userInteraction);

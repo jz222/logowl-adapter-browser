@@ -1,4 +1,5 @@
 import userInteractions from '../userInteractions/index';
+import constants from '../constants/index';
 import broker from '../broker/index';
 
 /**
@@ -27,7 +28,20 @@ const enableErrorListener = () => {
  * Enables the event listener for user interactions.
  */
 const enableUserInteractionsListener = () => {
-    document.addEventListener('focusin', userInteractions.add);
+    const focusInListener = (e) => {
+        if (constants.focusableElements.includes(e.target.tagName.toLowerCase())) {
+            userInteractions.add(e);
+        }
+    };
+    
+    const clickListener = (e) => {
+        if (!constants.focusableElements.includes(e.target.tagName.toLowerCase())) {
+            userInteractions.add(e);
+        }
+    };
+    
+    document.addEventListener('focusin', focusInListener);
+    document.addEventListener('click', clickListener)
 };
 
 /**
