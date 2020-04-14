@@ -1,7 +1,7 @@
 .idea
 node_modules
 dev
-src
+src/*
 babel.config.js
 rollup.config.js
 README.md
