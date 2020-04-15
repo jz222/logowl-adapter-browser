@@ -1,6 +1,6 @@
 {
     "name": "@loggy/adapter-browser",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Adapter to monitor websites and web application front-ends.",
     "main": "dist/loggy-client-browser.js",
     "repository": {
