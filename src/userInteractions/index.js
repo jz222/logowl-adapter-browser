@@ -12,14 +12,8 @@ const userInteractions = () => {
      * @param e {object} the event object
      */
     const add = (e) => {
-        let outerHtml = e.target.outerHTML.replace(/"/g, `'`);
-        
-        if (e.target.tagName.toLowerCase() === 'html' || e.target.tagName.toLowerCase() === 'body') {
-            outerHtml = 'n/a';
-        }
-        
         const userInteraction = {
-            outerHtml,
+            innerText: e.target.innerText,
             timestamp: utils.generateUTCInSeconds(),
             element: e.target.tagName.toLowerCase(),
             elementId: e.target.id,
