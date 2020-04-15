@@ -6,7 +6,16 @@ import broker from '../broker/index';
  * Enables the error event listener.
  */
 const enableErrorListener = () => {
+    let previousMsg = '';
+    
     window.onerror = (message, file, line, column, error = {}) => {
+        if (message === previousMsg) {
+            return false;
+        }
+        
+        previousMsg = message;
+        setTimeout(() => previousMsg = '', 2000);
+        
         column = column || (window.event && window.event.errorCharacter);
         
         const errorEvent = {
