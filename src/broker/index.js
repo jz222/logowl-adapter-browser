@@ -29,6 +29,7 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
         line: line.toString(),
         type: (constructor && constructor.name) || 'error',
         userInteractions: userInteraction.get(),
+        host: window.location.origin,
         stacktrace,
         adapter: constants.adapter,
         timestamp: utils.generateUTCInSeconds()
