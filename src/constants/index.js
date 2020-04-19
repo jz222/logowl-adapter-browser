@@ -10,6 +10,6 @@ export default {
     adapter: {
         name: 'loggy-adapter-browser',
         type: 'browser',
-        version: 'v1.0.0'
+        version: 'v0.1.7'
     }
 };
