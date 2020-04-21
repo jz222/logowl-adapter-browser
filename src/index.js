@@ -1,5 +1,6 @@
 import eventListener from './eventListener/index';
 import interceptors from './interceptors/index';
+import analytics from './analytics/index';
 import broker from './broker/index';
 import config from './config/index';
 
@@ -11,7 +12,13 @@ const init = (userConfig) => {
     config.set(userConfig);
     
     interceptors.enableAll();
-    eventListener.enableAll();
+    eventListener.enableUserInteractionsListener();
+    eventListener.enableErrorListener();
+    
+    if (userConfig.enableAnalytics) {
+        eventListener.enablePageLeaveListener();
+        analytics.setBasicAnalyticData();
+    }
 };
 
 /**

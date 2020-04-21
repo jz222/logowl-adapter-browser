@@ -1,4 +1,5 @@
 import userInteraction from '../userInteractions/index';
+import analytics from '../analytics/index';
 import constants from '../constants/index';
 import request from '../request/index';
 import config from '../config/index';
@@ -35,7 +36,16 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
         timestamp: utils.generateUTCInSeconds()
     };
     
-    request(payload);
+    request.sendError(payload);
 };
 
-export default { registerError };
+const sendAnalyticsData = () => {
+    const userConfig = config.get();
+    const analyticsData = analytics.get();
+    
+    analyticsData.ticket = userConfig.ticket;
+    
+    request.sendAnalytics(analyticsData);
+};
+
+export default { registerError, sendAnalyticsData };
