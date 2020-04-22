@@ -13,9 +13,9 @@ const analytics = () => {
     const setBasicAnalyticData = () => {
         const pathname = window.location.pathname;
         
-        _analyticData.isNewPageVisitor = localStorage.getItem('loggy-analytics-enabled') === null;
+        _analyticData.isNewVisitor = localStorage.getItem('loggy-analytics-enabled') === null;
         _analyticData.entryPage = pathname[0] === '/' ? pathname : '/' + pathname;
-        _analyticData.referrer = "google";
+        _analyticData.referrer = document.referrer || 'direct';
         
         localStorage.setItem('loggy-analytics-enabled', 'true');
     };
