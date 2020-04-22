@@ -14,10 +14,12 @@ const analytics = () => {
         const pathname = window.location.pathname;
         
         _analyticData.isNewVisitor = localStorage.getItem('loggy-analytics-enabled') === null;
+        _analyticData.isNewSession = sessionStorage.getItem('loggy-analytics-active-session') === null;
         _analyticData.entryPage = pathname[0] === '/' ? pathname : '/' + pathname;
         _analyticData.referrer = document.referrer || 'direct';
         
         localStorage.setItem('loggy-analytics-enabled', 'true');
+        sessionStorage.setItem('loggy-analytics-active-session', 'true');
     };
     
     const get = () => {
