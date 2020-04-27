@@ -11,5 +11,7 @@ export default {
         name: 'loggy-adapter-browser',
         type: 'browser',
         version: 'v0.1.7'
-    }
+    },
+    consentKey: 'loggy-analytics-enabled',
+    sessionKey: 'loggy-analytics-active-session'
 };

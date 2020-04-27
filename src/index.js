@@ -1,5 +1,6 @@
 import eventListener from './eventListener/index';
 import interceptors from './interceptors/index';
+import constants from './constants/index';
 import analytics from './analytics/index';
 import broker from './broker/index';
 import config from './config/index';
@@ -9,13 +10,17 @@ import config from './config/index';
  * @param userConfig {object} the config provided by the user
  */
 const init = (userConfig) => {
+    if (!('sendAnalytics' in userConfig)) {
+        userConfig.sendAnalytics = localStorage.getItem(constants.consentKey) !== null;
+    }
+    
     config.set(userConfig);
     
     interceptors.enableAll();
     eventListener.enableUserInteractionsListener();
     eventListener.enableErrorListener();
     
-    if (userConfig.enableAnalytics) {
+    if (userConfig.sendAnalytics) {
         eventListener.enablePageLeaveListener();
         analytics.setBasicAnalyticData();
     }
@@ -35,4 +40,24 @@ const emitError = (error) => {
     broker.registerError(error);
 };
 
-export default { init, emitError };
+/**
+ * Enables sending analytic data.
+ */
+const enableAnalytics = () => {
+    config.setSendAnalytics(true);
+    
+    eventListener.enablePageLeaveListener();
+    analytics.setBasicAnalyticData();
+};
+
+/**
+ * Disables sending analytic data.
+ */
+const disableAnalytics = () => {
+    config.setSendAnalytics(false);
+    
+    sessionStorage.removeItem(constants.sessionKey);
+    localStorage.removeItem(constants.consentKey);
+};
+
+export default { init, emitError, enableAnalytics, disableAnalytics };

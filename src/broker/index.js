@@ -39,13 +39,18 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
     request.sendError(payload);
 };
 
+/**
+ * Prepares analytic data and sends it to the LOGGY service.
+ */
 const sendAnalyticsData = () => {
     const userConfig = config.get();
     const analyticsData = analytics.get();
     
     analyticsData.ticket = userConfig.ticket;
     
-    request.sendAnalytics(analyticsData);
+    if (userConfig.sendAnalytics) {
+        request.sendAnalytics(analyticsData);
+    }
 };
 
 export default { registerError, sendAnalyticsData };
