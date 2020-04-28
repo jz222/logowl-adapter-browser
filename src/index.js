@@ -3,18 +3,35 @@ import interceptors from './interceptors/index';
 import constants from './constants/index';
 import analytics from './analytics/index';
 import broker from './broker/index';
+import banner from './banner/index';
 import config from './config/index';
+
+/**
+ * Enables sending analytic data.
+ */
+const enableAnalytics = () => {
+    config.setSendAnalytics(true);
+    
+    eventListener.enablePageLeaveListener();
+    analytics.setBasicAnalyticData();
+};
 
 /**
  * Initializes the adapter with the provided user config.
  * @param userConfig {object} the config provided by the user
  */
 const init = (userConfig) => {
+    const hasGivenConsent = localStorage.getItem(constants.consentKey) !== null;
+    
     if (!('sendAnalytics' in userConfig)) {
-        userConfig.sendAnalytics = localStorage.getItem(constants.consentKey) !== null;
+        userConfig.sendAnalytics = hasGivenConsent;
     }
     
     config.set(userConfig);
+    
+    if (userConfig.showBanner && !hasGivenConsent) {
+        banner.render(enableAnalytics);
+    }
     
     interceptors.enableAll();
     eventListener.enableUserInteractionsListener();
@@ -38,16 +55,6 @@ const emitError = (error) => {
     error.path = splitStacktrace.slice(0, -2).join(':').trim();
     
     broker.registerError(error);
-};
-
-/**
- * Enables sending analytic data.
- */
-const enableAnalytics = () => {
-    config.setSendAnalytics(true);
-    
-    eventListener.enablePageLeaveListener();
-    analytics.setBasicAnalyticData();
 };
 
 /**

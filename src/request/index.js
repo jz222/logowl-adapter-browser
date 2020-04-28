@@ -1,6 +1,10 @@
 import constants from '../constants/index';
 import config from '../config/index';
 
+/**
+ * Determines the host of the LOGGY service.
+ * @returns {*}
+ */
 const getHost = () => {
     const userConfig = config.get();
     
@@ -35,6 +39,12 @@ const post = (event, eventType = 'error') => {
     }
 };
 
+/**
+ * Sends an analytic event. It uses send sendBeacon
+ * to send the event or makes a regular POST request
+ * if sendBeacon is not available.
+ * @param payload
+ */
 const sendAnalytics = (payload) => {
     if ('sendBeacon' in navigator) {
         const host = getHost();

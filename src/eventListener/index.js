@@ -60,6 +60,9 @@ const enableUserInteractionsListener = () => {
     document.addEventListener('click', clickListener)
 };
 
+/**
+ * Enables the event listener for sending analytics event.
+ */
 const enablePageLeaveListener = () => {
     window.addEventListener('beforeunload', broker.sendAnalyticsData);
 };
