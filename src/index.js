@@ -1,17 +1,46 @@
 import eventListener from './eventListener/index';
 import interceptors from './interceptors/index';
+import constants from './constants/index';
+import analytics from './analytics/index';
 import broker from './broker/index';
+import banner from './banner/index';
 import config from './config/index';
+
+/**
+ * Enables sending analytic data.
+ */
+const enableAnalytics = () => {
+    config.setSendAnalytics(true);
+    
+    eventListener.enablePageLeaveListener();
+    analytics.setBasicAnalyticData();
+};
 
 /**
  * Initializes the adapter with the provided user config.
  * @param userConfig {object} the config provided by the user
  */
 const init = (userConfig) => {
+    const hasGivenConsent = localStorage.getItem(constants.consentKey) !== null;
+    
+    if (!('sendAnalytics' in userConfig)) {
+        userConfig.sendAnalytics = hasGivenConsent;
+    }
+    
     config.set(userConfig);
     
+    if (userConfig.showBanner && !hasGivenConsent) {
+        banner.render(enableAnalytics, userConfig.bannerText, userConfig.bannerAcceptLabel, userConfig.bannerRejectLabel);
+    }
+    
     interceptors.enableAll();
-    eventListener.enableAll();
+    eventListener.enableUserInteractionsListener();
+    eventListener.enableErrorListener();
+    
+    if (userConfig.sendAnalytics) {
+        eventListener.enablePageLeaveListener();
+        analytics.setBasicAnalyticData();
+    }
 };
 
 /**
@@ -28,4 +57,14 @@ const emitError = (error) => {
     broker.registerError(error);
 };
 
-export default { init, emitError };
+/**
+ * Disables sending analytic data.
+ */
+const disableAnalytics = () => {
+    config.setSendAnalytics(false);
+    
+    sessionStorage.removeItem(constants.sessionKey);
+    localStorage.removeItem(constants.consentKey);
+};
+
+export default { init, emitError, enableAnalytics, disableAnalytics };

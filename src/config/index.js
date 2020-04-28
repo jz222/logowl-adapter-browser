@@ -34,12 +34,19 @@ const config = () => {
     };
     
     /**
+     * Sets sendAnalytics of the user configuration.
+     * @param sendAnalytics {boolean} determines if analytics should be sent or not
+     * @returns {{[p: string]: *, sendAnalytics: *}}
+     */
+    const setSendAnalytics = (sendAnalytics) => _config = { ..._config, sendAnalytics };
+    
+    /**
      * Returns the stored user configuration.
      * @returns {{sendAnalytics: boolean}} the user configuration
      */
     const get = () => _config;
     
-    return { set, get };
+    return { set, setSendAnalytics, get };
 };
 
 export default config();

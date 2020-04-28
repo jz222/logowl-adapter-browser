@@ -61,11 +61,14 @@ const enableUserInteractionsListener = () => {
 };
 
 /**
- * Enables all event listeners.
+ * Enables the event listener for sending analytics event.
  */
-const enableAll = () => {
-    enableErrorListener();
-    enableUserInteractionsListener();
+const enablePageLeaveListener = () => {
+    window.addEventListener('beforeunload', broker.sendAnalyticsData);
 };
 
-export default { enableAll };
+export default {
+    enableErrorListener,
+    enableUserInteractionsListener,
+    enablePageLeaveListener
+};

@@ -26,17 +26,9 @@ To initialize the adapter with your desired configuration, you need to pass the 
 
 The ticket is the only mandatory information. Each service has a unique ticket and all events sent with this ticket will be attached to the corresponding service.
 
-### Badges
-
-Badges contain individual information that will be attached to the event. A badge must be of type string.
-
 ```javascript
-window.loggy.init({
-  ticket: '2ATNP1AD70',
-  badges: {
-    example: 'information',
-    language: navigator.language
-  }
+loggy.init({
+  ticket: '2ATNP1AD70'
 });
 ```
 
@@ -62,6 +54,23 @@ loggy.init({
 });
 ```
 
+
+## Error Tracking
+
+### Badges
+
+Badges contain individual information that will be attached to the event. A badge must be of type string.
+
+```javascript
+window.loggy.init({
+  ticket: '2ATNP1AD70',
+  badges: {
+    example: 'information',
+    language: navigator.language
+  }
+});
+```
+
 ## Testing
 
 To test if everything works you can just try to execute an undefined function like so.
@@ -82,4 +91,57 @@ try {
 } catch(error) {
   window.loggy && window.loggy.emitError(error);
 }
+```
+
+## Analytics
+
+The adapter does not only catch errors but also collect analytic data. By default this analytics are disabled.
+
+### Enable analytics
+
+You can enable analytics via the `init` function.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70',
+  sendAnalytics: true
+});
+```
+
+### Enable analytics manually
+
+To manually enable analytics after initializing the adapter, call the `enableAnalytics` function. This is useful if you want to create a banner to get the visitor's consent before collecting their data.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70'
+});
+
+loggy.enableAnalytics();
+```
+
+### Consent banner
+
+The adapter comes with a default banner. The visitor's data will only be collected if the user gives it consent by clicking the "Accept" button on the banner. The keys `bannerText`, `bannerRejectLabel` and `bannerAcceptLabel` are optional. If not provided, the adapter will use defaults.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70',
+  showBanner: true,
+  bannerText: 'We would like to collect anonymized data to improve your experience.',
+  bannerRejectLabel: 'Cancel',
+  bannerAcceptLabel: 'Accept'
+});
+```
+
+### Disable analytics manually
+
+If a visitor gave their consent but want to revoke their decision and no longer be tracked, you can disable analytics for them by calling the `disableAnalytics` function.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70'
+});
+
+loggy.disableAnalytics();
 ```
