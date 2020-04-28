@@ -30,7 +30,7 @@ const init = (userConfig) => {
     config.set(userConfig);
     
     if (userConfig.showBanner && !hasGivenConsent) {
-        banner.render(enableAnalytics);
+        banner.render(enableAnalytics, userConfig.bannerText, userConfig.bannerAcceptLabel, userConfig.bannerRejectLabel);
     }
     
     interceptors.enableAll();
