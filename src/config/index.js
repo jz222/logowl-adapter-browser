@@ -5,6 +5,7 @@
 const config = () => {
     let _config = {
         sendAnalytics: false,
+        anonymizeData: true
     };
     
     /**

@@ -23,6 +23,7 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
     
     const payload = {
         ticket: userConfig.ticket,
+        anonymizeData: userConfig.anonymizeData,
         message,
         path,
         logs: logs.get(),

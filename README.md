@@ -7,7 +7,7 @@ Adapter to monitor websites and web application front-ends.
 Add the script to the header of your website or web application.
 
 ```html
-<script src="https://unpkg.com/@loggy/adapter-browser@0.1.7/dist/loggy-client-browser.js" crossorigin></script>
+<script src="https://unpkg.com/@loggy/adapter-browser@0.1.8/dist/loggy-client-browser.js" crossorigin></script>
 ```
 
 ## Configuration
@@ -15,7 +15,7 @@ Add the script to the header of your website or web application.
 To initialize the adapter with your desired configuration, you need to pass the configuration object to the `init` method.
 
 ```html
-<script src="https://unpkg.com/@loggy/adapter-browser@0.1.7/dist/loggy-client-browser.js" crossorigin></script>
+<script src="https://unpkg.com/@loggy/adapter-browser@0.1.8/dist/loggy-client-browser.js" crossorigin></script>
 
 <script>
   window.loggy && window.loggy.init({ ticket: '2ATNP1AD70' });
@@ -54,6 +54,16 @@ loggy.init({
 });
 ```
 
+### Disable anonymization
+
+By default LOGGY does not store the clients IP address. Keeping track of the IP address can be enabled with the option `anonymizeData`.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70',
+  anonymizeData: false
+});
+```
 
 ## Error Tracking
 
