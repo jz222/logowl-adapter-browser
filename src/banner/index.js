@@ -73,7 +73,7 @@ const render = (cb, label = '', acceptButtonText = '', rejectButtonText = '') =>
     
     rejectButton.style.padding = '5px 10px';
     rejectButton.style.border = 'none';
-    rejectButton.style.backgroundColor = 'none';
+    rejectButton.style.backgroundColor = 'transparent';
     rejectButton.style.fontFamily = 'Helvetica, sans-serif';
     rejectButton.style.fontWeight = '500';
     rejectButton.style.color = '#5B6F8C';

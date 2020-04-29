@@ -5,6 +5,7 @@ import analytics from './analytics/index';
 import broker from './broker/index';
 import banner from './banner/index';
 import config from './config/index';
+import utils from './utils/index';
 
 /**
  * Enables sending analytic data.
@@ -48,11 +49,10 @@ const init = (userConfig) => {
  * @param error {object} error object
  */
 const emitError = (error) => {
-    const lastStacktrace = error.stack.replace('at ', '').split('\n')[1] || '';
-    const splitStacktrace = lastStacktrace.split(':');
+    const stacktrace = utils.parseStacktrace(error);
     
-    error.line = splitStacktrace[splitStacktrace.length - 2];
-    error.path = splitStacktrace.slice(0, -2).join(':').trim();
+    error.line = stacktrace.line;
+    error.path = stacktrace.path;
     
     broker.registerError(error);
 };

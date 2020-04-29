@@ -32,6 +32,26 @@ const enableErrorListener = () => {
         
         return false;
     };
+    
+    window.onunhandledrejection = (error) => {
+        const dummyError = new Error();
+        
+        dummyError.stack = error.reason.stack;
+        
+        const stacktrace = utils.parseStacktrace(dummyError);
+        
+        const errorEvent = {
+            message: error.reason.message,
+            path: stacktrace.path,
+            line: stacktrace.line,
+            stack: error.reason.stack,
+            constructor: {
+                name: error.type
+            }
+        };
+        
+        broker.registerError(errorEvent);
+    };
 };
 
 /**
