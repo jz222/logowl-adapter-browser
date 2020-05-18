@@ -155,3 +155,22 @@ loggy.init({
 
 loggy.disableAnalytics();
 ```
+
+### Blacklist URLs
+
+Your website might have certain paths that can contain personal information of your users either as URL variable or query parameter. These URLs could look like so:
+
+- `https://example.com/account?user-email=user@example.com`
+- `https://example.com/info/exampleuser/`
+
+The visited URL gets send to LOGGY for analytic purposes, if you have enabled the analytics feature. You have the option to blacklist URLs that contain sensitive information like the one shown above. To do that you can provide an array with blacklisted URLs to the configuration when initializing the adapter.
+
+```javascript
+loggy.init({
+  ticket: '2ATNP1AD70',
+  sendAnalytics: true,
+  urlBlacklist: ['example.com/account', 'example.com/info']
+});
+```
+
+The matching URLs will be overwritten with `'blacklisted'` before they are sent to the LOGGY service.
