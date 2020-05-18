@@ -1,4 +1,5 @@
 import constants from '../constants/index';
+import config from '../config/index';
 
 /**
  * Manages and stores analytic data.
@@ -24,12 +25,23 @@ const analytics = () => {
      * Sets basic analytic data.
      */
     const setBasicAnalyticData = () => {
+        const urlBlacklist = config.get().urlBlacklist;
+        
         const pathname = window.location.pathname;
         
         _analyticData.isNewVisitor = localStorage.getItem(constants.consentKey) === null;
         _analyticData.isNewSession = sessionStorage.getItem(constants.sessionKey) === null;
         _analyticData.page = pathname[0] === '/' ? pathname : '/' + pathname;
         _analyticData.referrer = document.referrer || 'direct';
+        
+        if (urlBlacklist) {
+            for (let i = 0; i < urlBlacklist.length; i++) {
+                if (_analyticData.page.indexOf(urlBlacklist[i]) !== -1) {
+                    _analyticData.page = 'blacklisted';
+                    break;
+                }
+            }
+        }
         
         localStorage.setItem(constants.consentKey, 'true');
         sessionStorage.setItem(constants.sessionKey, 'true');

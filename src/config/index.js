@@ -25,6 +25,10 @@ const config = () => {
             throw new Error('the provided LOGGY badges need to be an object');
         }
         
+        if (userConfig.urlBlacklist && !Array.isArray(userConfig.urlBlacklist)) {
+            throw new Error('the provided LOGGY URL blacklist needs to be an array');
+        }
+        
         Object.keys(userConfig.badges || {}).forEach(badge => {
             if (typeof userConfig.badges[badge] !== 'string') {
                 throw new Error('LOGGY badges can only contain strings');
