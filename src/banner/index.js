@@ -51,7 +51,7 @@ const render = (cb, label = '', acceptButtonText = '', rejectButtonText = '') =>
     banner.style.boxShadow = 'rgba(190, 210, 250, 0.8) 0 2px 20px 0';
     banner.style.backdropFilter = 'blur(20px)';
     banner.style.boxSizing = 'border-box';
-    banner.id = 'loggy-banner';
+    banner.id = 'logowl-banner';
     
     caption.style.margin = '0';
     caption.style.fontFamily = 'Helvetica, sans-serif';
