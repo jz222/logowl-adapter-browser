@@ -6,7 +6,7 @@ export default {
     adapter: {
         name: 'logowl-adapter-browser',
         type: 'browser',
-        version: 'v0.1.7'
+        version: 'v2.0.0'
     },
     consentKey: 'logowl-analytics-enabled',
     sessionKey: 'logowl-analytics-active-session'
