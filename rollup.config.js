@@ -4,7 +4,7 @@ import { terser } from 'rollup-plugin-terser';
 export default {
     input: 'src/index.js',
     output: {
-        file: 'dist/logowl-client-browser.js',
+        file: 'dist/logowl-adapter-browser.js',
         format: 'iife',
         name: 'logowl'
     },
