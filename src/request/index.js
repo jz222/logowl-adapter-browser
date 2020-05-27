@@ -46,7 +46,9 @@ const post = (event, eventType = 'error') => {
  * @param payload
  */
 const sendAnalytics = (payload) => {
-    if ('sendBeacon' in navigator) {
+    // Due to a bug in webkit, sendBeacon might not work
+    // as expected on certain iOS versions.
+    if ('sendBeacon' in navigator && !constants.isMobile) {
         const host = getHost();
         navigator.sendBeacon(host + '/logging/analytics', JSON.stringify(payload));
     } else {

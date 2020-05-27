@@ -12,9 +12,16 @@ import utils from './utils/index';
  */
 const enableAnalytics = () => {
     config.setSendAnalytics(true);
-    
-    eventListener.enablePageLeaveListener();
     analytics.setBasicAnalyticData();
+    
+    // Due to technical limitations the analytic
+    // data is sent instantaneously on mobile
+    // devices and not when the page unloaded.
+    if (constants.isMobile) {
+        broker.sendAnalyticsData();
+    } else {
+        eventListener.enablePageLeaveListener();
+    }
 };
 
 /**
@@ -39,8 +46,16 @@ const init = (userConfig) => {
     eventListener.enableErrorListener();
     
     if (userConfig.sendAnalytics) {
-        eventListener.enablePageLeaveListener();
         analytics.setBasicAnalyticData();
+        
+        // Due to technical limitations the analytic
+        // data is sent instantaneously on mobile
+        // devices and not when the page unloaded.
+        if (constants.isMobile) {
+            broker.sendAnalyticsData();
+        } else {
+            eventListener.enablePageLeaveListener();
+        }
     }
 };
 

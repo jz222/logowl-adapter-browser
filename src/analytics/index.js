@@ -53,6 +53,13 @@ const analytics = () => {
      */
     const get = () => {
         _analyticData.timeOnPage = Math.floor((new Date() - _entryPointTimestamp) / 1000);
+    
+        // On mobile devices analytic data is submitted instantaneously since
+        // they don't support events on document unload. Hence the time
+        // needs to be set to 0 to not distort the results.
+        if (constants.isMobile) {
+            _analyticData.timeOnPage = 0;
+        }
         
         return _analyticData;
     };
