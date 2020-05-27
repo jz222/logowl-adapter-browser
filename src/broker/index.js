@@ -7,7 +7,7 @@ import utils from '../utils/index';
 import logs from '../logs/index';
 
 /**
- * Prepares an error and sends it to the LOGGY service.
+ * Prepares an error and sends it to the Log Owl service.
  * @param message {string} error message
  * @param path {string} path of the file where the error occurred
  * @param line {string} the line in which the error occurred
@@ -41,7 +41,7 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
 };
 
 /**
- * Prepares analytic data and sends it to the LOGGY service.
+ * Prepares analytic data and sends it to the Log Owl service.
  */
 const sendAnalyticsData = () => {
     const userConfig = config.get();

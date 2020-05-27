@@ -1,17 +1,13 @@
 export default {
     focusableElements: ['button', 'details', 'input', 'iframe', 'select', 'textarea'],
     connectivity: {
-        service: {
-            local: 'http://localhost:2800',
-            demo: 'https://loggy-demo-qvnfzcesoq-ew.a.run.app',
-            prod: 'https://loggy-prod-qvnfzcesoq-ew.a.run.app'
-        }
+        serviceURL: 'https://api.logowl.io'
     },
     adapter: {
-        name: 'loggy-adapter-browser',
+        name: 'logowl-adapter-browser',
         type: 'browser',
-        version: 'v0.1.7'
+        version: 'v2.0.0'
     },
-    consentKey: 'loggy-analytics-enabled',
-    sessionKey: 'loggy-analytics-active-session'
+    consentKey: 'logowl-analytics-enabled',
+    sessionKey: 'logowl-analytics-active-session'
 };

@@ -2,13 +2,13 @@ import constants from '../constants/index';
 import config from '../config/index';
 
 /**
- * Determines the host of the LOGGY service.
+ * Determines the host of the Log Owl service.
  * @returns {*}
  */
 const getHost = () => {
     const userConfig = config.get();
     
-    let host = constants.connectivity.service[userConfig.instance] || constants.connectivity.service.prod;
+    let host = constants.connectivity.serviceURL;
     
     if (userConfig.endpoint) {
         host = userConfig.endpoint;
@@ -18,7 +18,7 @@ const getHost = () => {
 };
 
 /**
- * Sends the corresponding event to the LOGGY service.
+ * Sends the corresponding event to the Log Owl service.
  * @param event {object} the event that should be sent
  * @param eventType {string} type of the event determines to which endpoint the event should be sent
  */
@@ -34,7 +34,7 @@ const post = (event, eventType = 'error') => {
     
     req.onreadystatechange = function () {
         if (this.readyState === 4 && this.status !== 200) {
-            console.error('failed to send event to LOGGY with error:', this.statusText);
+            console.error('failed to send event to Log Owl with error:', this.statusText);
         }
     }
 };
