@@ -13,11 +13,11 @@ const userInteractions = () => {
      */
     const add = (e) => {
         const userInteraction = {
-            innerText: e.target.innerText,
+            innerText: (e.target.innerText || '').slice(0, 195) + '...',
             timestamp: utils.generateUTCInSeconds(),
             element: e.target.tagName.toLowerCase(),
-            elementId: e.target.id,
-            location: window.location.pathname
+            elementId: (e.target.id || '').slice(0, 195) + '...',
+            location: (window.location.pathname || '').slice(0, 395) + '...'
         };
         
         userInteractions.push(userInteraction);
