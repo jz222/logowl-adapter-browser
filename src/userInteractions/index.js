@@ -12,11 +12,22 @@ const userInteractions = () => {
      * @param e {object} the event object
      */
     const add = (e) => {
+        let elementId = e.target.getAttribute('data-logowl-element-id') || e.target.id;
+        let innerText = e.target.innerText;
+        
+        if (elementId && elementId.length >= 195) {
+            elementId = elementId.slice(0, 195) + '...';
+        }
+        
+        if (innerText && innerText.length >= 195) {
+            innerText = innerText.slice(0, 195) + '...';
+        }
+        
         const userInteraction = {
-            innerText: (e.target.innerText || '').slice(0, 195) + '...',
+            innerText: innerText || '',
             timestamp: utils.generateUTCInSeconds(),
             element: e.target.tagName.toLowerCase(),
-            elementId: (e.target.id || '').slice(0, 195) + '...',
+            elementId: elementId || '',
             location: (window.location.pathname || '').slice(0, 395) + '...'
         };
         
