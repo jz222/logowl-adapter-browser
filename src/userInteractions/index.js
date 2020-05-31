@@ -14,6 +14,7 @@ const userInteractions = () => {
     const add = (e) => {
         let elementId = e.target.getAttribute('data-logowl-element-id') || e.target.id;
         let innerText = e.target.innerText;
+        let location = window.location.pathname;
         
         if (elementId && elementId.length >= 195) {
             elementId = elementId.slice(0, 195) + '...';
@@ -23,12 +24,16 @@ const userInteractions = () => {
             innerText = innerText.slice(0, 195) + '...';
         }
         
+        if (location && location.length >= 195) {
+            location = location.slice(0, 395) + '...';
+        }
+        
         const userInteraction = {
             innerText: innerText || '',
             timestamp: utils.generateUTCInSeconds(),
             element: e.target.tagName.toLowerCase(),
             elementId: elementId || '',
-            location: (window.location.pathname || '').slice(0, 395) + '...'
+            location: location || ''
         };
         
         userInteractions.push(userInteraction);
