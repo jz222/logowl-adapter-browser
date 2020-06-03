@@ -21,6 +21,9 @@ const registerError = ({ message, path = '', line = '', stack: stacktrace, const
         return;
     }
     
+    message = message.length >= 1000 ? message.slice(0, 995) + '...' : message;
+    stacktrace = stacktrace.length >= 15000 ? stacktrace.slice(0, 14995) + '...' : stacktrace;
+    
     const payload = {
         ticket: userConfig.ticket,
         anonymizeData: userConfig.anonymizeData,

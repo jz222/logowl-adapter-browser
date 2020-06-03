@@ -16,6 +16,8 @@ const logs = () => {
             return;
         }
         
+        log = log.length >= 1000 ? log.slice(0, 995) + '...' : log;
+        
         logs.push({ timestamp: utils.generateUTCInSeconds(), type: 'log', log });
         
         if (logs.length > 15) {
