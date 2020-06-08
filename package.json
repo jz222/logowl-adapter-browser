@@ -1,6 +1,6 @@
 {
     "name": "@logowl/adapter-browser",
-    "version": "2.2.3",
+    "version": "2.2.4",
     "description": "Adapter to monitor websites and web application front-ends.",
     "main": "dist/logowl-adapter-browser.js",
     "repository": {
