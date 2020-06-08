@@ -6,7 +6,7 @@ export default {
     adapter: {
         name: 'logowl-adapter-browser',
         type: 'browser',
-        version: 'v2.2.4'
+        version: 'v2.3.0'
     },
     isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
     consentKey: 'logowl-analytics-enabled',
