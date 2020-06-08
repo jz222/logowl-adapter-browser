@@ -33,7 +33,7 @@ const enableErrorListener = () => {
         return false;
     };
     
-    window.onunhandledrejection = (error) => {
+    window.addEventListener('unhandledrejection', (error) => {
         const dummyError = new Error();
         
         dummyError.stack = error.reason.stack;
@@ -51,7 +51,7 @@ const enableErrorListener = () => {
         };
         
         broker.registerError(errorEvent);
-    };
+    });
 };
 
 /**
