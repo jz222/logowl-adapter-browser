@@ -45,7 +45,7 @@ const init = (userConfig) => {
     eventListener.enableUserInteractionsListener();
     eventListener.enableErrorListener();
     
-    if (userConfig.sendAnalytics) {
+    if (userConfig.sendAnalytics && !userConfig.SPAMode) {
         analytics.setBasicAnalyticData();
         
         // Due to technical limitations the analytic
@@ -82,4 +82,25 @@ const disableAnalytics = () => {
     localStorage.removeItem(constants.consentKey);
 };
 
-export default { init, emitError, enableAnalytics, disableAnalytics };
+/**
+ * Sets basic analytic data.
+ */
+const enteringPage = () => {
+    analytics.setBasicAnalyticData();
+};
+
+/**
+ * Submits the analytic data.
+ */
+const leavingPage = () => {
+    broker.sendAnalyticsData();
+};
+
+export default {
+    init,
+    emitError,
+    enableAnalytics,
+    disableAnalytics,
+    enteringPage,
+    leavingPage
+};
