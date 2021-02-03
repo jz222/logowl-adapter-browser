@@ -61,7 +61,7 @@ const enableUserInteractionsListener = () => {
     const focusableElements = constants.focusableElements;
     
     const focusInListener = (e) => {
-        const tagName = e.target.tagName.toLowerCase();
+        const tagName = (e.target.tagName && e.target.tagName.toLowerCase()) || '';
         
         if (utils.includes(focusableElements, tagName)) {
             userInteractions.add(e);
@@ -69,7 +69,7 @@ const enableUserInteractionsListener = () => {
     };
     
     const clickListener = (e) => {
-        const tagName = e.target.tagName.toLowerCase();
+        const tagName = (e.target.tagName && e.target.tagName.toLowerCase()) || '';
         
         if (!utils.includes(focusableElements, tagName)) {
             userInteractions.add(e);

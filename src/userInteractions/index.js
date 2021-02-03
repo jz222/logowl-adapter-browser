@@ -31,7 +31,7 @@ const userInteractions = () => {
         const userInteraction = {
             innerText: innerText || '',
             timestamp: utils.generateUTCInSeconds(),
-            element: e.target.tagName.toLowerCase(),
+            element: (e.target.tagName && e.target.tagName.toLowerCase()) || 'n/a',
             elementId: elementId || '',
             location: location || ''
         };
