@@ -12,6 +12,10 @@ const userInteractions = () => {
      * @param e {object} the event object
      */
     const add = (e) => {
+        if (!e.target) {
+            return;
+        }
+        
         let elementId = e.target.getAttribute('data-logowl-element-id') || e.target.id;
         let innerText = e.target.innerText;
         let location = window.location.pathname;
